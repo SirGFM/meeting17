@@ -1,5 +1,6 @@
 
 #ifndef __COLLECTIBLE_STRUCT_H__
+#define __COLLECTIBLE_STRUCT_H__
 
 enum enColliectibleFlags {
     CF_IS_ALIVE = 0x00001
@@ -10,7 +11,6 @@ struct stCollectiblePublicCtx {
 };
 typedef struct stCollectiblePublicCtx collectibleCtx;
 
-#define __COLLECTIBLE_STRUCT_H__
 #endif /* __COLLECTIBLE_STRUCT_H__ */
 
 #ifndef __COLLECTIBLE_H__
