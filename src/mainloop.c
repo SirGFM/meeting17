@@ -13,6 +13,8 @@
 #include <GFraMe/gfmError.h>
 #include <GFraMe/gfmQuadtree.h>
 
+#include <meeting17/playstate.h>
+
 /** Run the main loop until the game is closed */
 err mainloop() {
     err erv;
@@ -25,7 +27,7 @@ err mainloop() {
         /* Switch state */
         if (game.nextState != ST_NONE) {
             switch (game.nextState) {
-                // case ST_PLAYSTATE: erv = loadPlaystate(); break;
+                case ST_PLAYSTATE: erv = playstate_init(); break;
                 default: {}
             }
             ASSERT_TO(erv == ERR_OK, NOOP(), __ret);
@@ -57,7 +59,7 @@ err mainloop() {
 
             /* Update the current state */
             switch (game.currentState) {
-                //case ST_PLAYSTATE: erv = updatePlaystate(); break;
+                case ST_PLAYSTATE: erv = playstate_update(); break;
                 default: {}
             }
             ASSERT_TO(erv == ERR_OK, NOOP(), __ret);
@@ -74,7 +76,7 @@ err mainloop() {
 
             /* Render the current state */
             switch (game.currentState) {
-                //case ST_PLAYSTATE: erv = drawPlaystate(); break;
+                case ST_PLAYSTATE: erv = playstate_draw(); break;
                 default: {}
             }
             ASSERT_TO(erv == ERR_OK, NOOP(), __ret);
@@ -100,6 +102,7 @@ err mainloop() {
 
     erv = ERR_OK;
 __ret:
+    playstate_clean();
 
     return erv;
 }
