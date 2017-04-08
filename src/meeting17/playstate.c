@@ -39,10 +39,20 @@ void playstate_clean() {
 }
 
 err playstate_update() {
+    err erv;
+
+    erv = fx_update();
+    ASSERT(erv == ERR_OK, erv);
+
     return ERR_OK;
 }
 
 err playstate_draw() {
+    err erv;
+
+    erv = fx_draw();
+    ASSERT(erv == ERR_OK, erv);
+
     return ERR_OK;
 }
 

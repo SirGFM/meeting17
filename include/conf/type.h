@@ -30,7 +30,13 @@ enum enType {
     , T_ENEMY     = gfmType_reserved_7  /* (10) light red */
     , T_FX        = gfmType_reserved_10 /* (13) dirty yellow/green */
 
-    //, T_SWORD_FX        = (1 << T_BASE_NBITS) | T_FX
+    , T_RED_JELLY_FX    = (1 << T_BASE_NBITS) | T_FX
+    , T_ORANGE_JELLY_FX = (2 << T_BASE_NBITS) | T_FX
+    , T_YELLOW_JELLY_FX = (3 << T_BASE_NBITS) | T_FX
+    , T_GREEN_JELLY_FX  = (4 << T_BASE_NBITS) | T_FX
+    , T_CYAN_JELLY_FX   = (5 << T_BASE_NBITS) | T_FX
+    , T_BLUE_JELLY_FX   = (6 << T_BASE_NBITS) | T_FX
+    , T_PURPLE_JELLY_FX = (7 << T_BASE_NBITS) | T_FX
 };
 typedef enum enType type;
 

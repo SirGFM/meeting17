@@ -5,6 +5,8 @@
 #include <conf/type.h>
 #include <GFraMe/gfmError.h>
 #include <GFraMe/gfmGroup.h>
+#include <GFraMe/gfmSprite.h>
+#include <GFraMe/gfmSpriteset.h>
 #include <meeting17/fx.h>
 #include <string.h>
 
@@ -13,17 +15,17 @@
 #define DEFAULT_TTL           4000
 
 #define JELLY_ANIM(f) \
-  f,f,f,f, f+128,f+256,f+128,f+256, f+384,f+512,f+640,f+768
+  f,f,f,f, f,f,f,f, f+128,f+256,f+128,f+256, f+384,f+512,f+640,f+768, f+896
 
 static int pFxAnimData[] = {
   /*                    len|fps|loop|data... */
-  /*   FXA_RED_JELLY  */ 12, 12,  0 , JELLY_ANIM(1024)
-, /* FXA_ORANGE_JELLY */ 12, 12,  0 , JELLY_ANIM(1025)
-, /* FXA_YELLOW_JELLY */ 12, 12,  0 , JELLY_ANIM(1026)
-, /*  FXA_GREEN_JELLY */ 12, 12,  0 , JELLY_ANIM(1027)
-, /*  FXA_CYAN_JELLY  */ 12, 12,  0 , JELLY_ANIM(1028)
-, /*  FXA_BLUE_JELLY  */ 12, 12,  0 , JELLY_ANIM(1029)
-, /* FXA_PURPLE_JELLY */ 12, 12,  0 , JELLY_ANIM(1030)
+  /*   FXA_RED_JELLY  */ 17, 20,  0 , JELLY_ANIM(1024)
+, /* FXA_ORANGE_JELLY */ 17, 20,  0 , JELLY_ANIM(1025)
+, /* FXA_YELLOW_JELLY */ 17, 20,  0 , JELLY_ANIM(1026)
+, /*  FXA_GREEN_JELLY */ 17, 20,  0 , JELLY_ANIM(1027)
+, /*  FXA_CYAN_JELLY  */ 17, 20,  0 , JELLY_ANIM(1028)
+, /*  FXA_BLUE_JELLY  */ 17, 20,  0 , JELLY_ANIM(1029)
+, /* FXA_PURPLE_JELLY */ 17, 20,  0 , JELLY_ANIM(1030)
 };
 static int fxAnimDataLen = sizeof(pFxAnimData) / sizeof(int);
 
@@ -95,7 +97,40 @@ err fx_draw() {
     return ERR_OK;
 }
 
-err fx_spawn() {
-    return ERR_OK;
+/** Spawn an effect with a non-default time-to-live */
+gfmSprite* fx_spawn_ttl(gfmSpriteset *pSset, type t, int x, int y, int w, int h
+        , fxAnim anim, int ttl) {
+    gfmSprite *pSpr;
+
+    gfmGroup_setDeathOnTime(fx.pGroup, ttl);
+    pSpr = fx_spawn(pSset, t, x, y, w, h, anim);
+    gfmGroup_setDeathOnTime(fx.pGroup, DEFAULT_TTL);
+
+    return pSpr;
+}
+
+gfmSprite* fx_spawn(gfmSpriteset *pSset, type t, int x, int y, int w, int h
+        , fxAnim anim) {
+    gfmSprite *pSpr;
+    gfmRV rv;
+
+    rv = gfmGroup_recycle(&pSpr, fx.pGroup);
+    ASSERT(rv == GFMRV_OK, 0);
+    rv = gfmSprite_setPosition(pSpr, x, y);
+    ASSERT(rv == GFMRV_OK, 0);
+    rv = gfmSprite_setDimensions(pSpr, w, h);
+    ASSERT(rv == GFMRV_OK, 0);
+    rv = gfmSprite_setOffset(pSpr, 0/*offx*/, 0/*offy*/);
+    ASSERT(rv == GFMRV_OK, 0);
+    rv = gfmSprite_setType(pSpr, t);
+    ASSERT(rv == GFMRV_OK, 0);
+    rv = gfmSprite_setSpriteset(pSpr, pSset);
+    ASSERT(rv == GFMRV_OK, 0);
+    rv = gfmSprite_playAnimation(pSpr, anim);
+    ASSERT(rv == GFMRV_OK, 0);
+    rv = gfmSprite_resetAnimation(pSpr);
+    ASSERT(rv == GFMRV_OK, 0);
+
+    return pSpr;
 }
 
