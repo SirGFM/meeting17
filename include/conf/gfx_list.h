@@ -21,6 +21,7 @@
  * this spriteset.
  */
 #define SPRITESET_LIST \
+  X(pSset2x2, 2/*width*/, 2/*height*/, atlas) \
   X(pSset8x8, 8/*width*/, 8/*height*/, atlas) \
   X(pSset16x16, 16/*width*/, 16/*height*/, atlas)
 

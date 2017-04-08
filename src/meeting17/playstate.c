@@ -1,8 +1,9 @@
 
 #include <base/error.h>
 #include <base/game.h>
-
+#include <meeting17/fx.h>
 #include <meeting17/playstate.h>
+#include <string.h>
 
 enum enPlaystateFlags {
     PF_STARTED = 0x01
@@ -20,6 +21,8 @@ err playstate_init() {
     /* If playstate was initialized, clean it up */
     playstate_clean();
 
+    fx_init();
+
     playstate.flags |= PF_STARTED;
     return ERR_OK;
 }
@@ -30,7 +33,9 @@ void playstate_clean() {
         return;
     }
 
-    playstate.flags &= ~PF_STARTED;
+    fx_clean();
+
+    memset(&playstate, 0x0, sizeof(struct stPlaystateCtx));
 }
 
 err playstate_update() {

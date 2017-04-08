@@ -26,6 +26,7 @@
          base/main.o \
          base/static.o \
          base/setup.o \
+         meeting17/fx.o \
          meeting17/playstate.o
 
 # Define the target name
