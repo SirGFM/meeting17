@@ -12,20 +12,20 @@
 
 #define MAX_FX_NUM            16384
 #define DEFAULT_DEATH_ON_EXIT 1
-#define DEFAULT_TTL           4000
+#define DEFAULT_TTL           1500
 
 #define JELLY_ANIM(f) \
-  f,f,f,f, f,f,f,f, f+128,f+256,f+128,f+256, f+384,f+512,f+640,f+768, f+896
+  f,f,f,f, f+128,f+256, f+384,f+512,f+640,f+768, f+896
 
 static int pFxAnimData[] = {
   /*                    len|fps|loop|data... */
-  /*   FXA_RED_JELLY  */ 17, 20,  0 , JELLY_ANIM(1024)
-, /* FXA_ORANGE_JELLY */ 17, 20,  0 , JELLY_ANIM(1025)
-, /* FXA_YELLOW_JELLY */ 17, 20,  0 , JELLY_ANIM(1026)
-, /*  FXA_GREEN_JELLY */ 17, 20,  0 , JELLY_ANIM(1027)
-, /*  FXA_CYAN_JELLY  */ 17, 20,  0 , JELLY_ANIM(1028)
-, /*  FXA_BLUE_JELLY  */ 17, 20,  0 , JELLY_ANIM(1029)
-, /* FXA_PURPLE_JELLY */ 17, 20,  0 , JELLY_ANIM(1030)
+  /*   FXA_RED_JELLY  */ 11, 20,  0 , JELLY_ANIM(1024)
+, /* FXA_ORANGE_JELLY */ 11, 20,  0 , JELLY_ANIM(1025)
+, /* FXA_YELLOW_JELLY */ 11, 20,  0 , JELLY_ANIM(1026)
+, /*  FXA_GREEN_JELLY */ 11, 20,  0 , JELLY_ANIM(1027)
+, /*  FXA_CYAN_JELLY  */ 11, 20,  0 , JELLY_ANIM(1028)
+, /*  FXA_BLUE_JELLY  */ 11, 20,  0 , JELLY_ANIM(1029)
+, /* FXA_PURPLE_JELLY */ 11, 20,  0 , JELLY_ANIM(1030)
 };
 static int fxAnimDataLen = sizeof(pFxAnimData) / sizeof(int);
 
