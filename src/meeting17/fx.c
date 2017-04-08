@@ -10,7 +10,7 @@
 #include <meeting17/fx.h>
 #include <string.h>
 
-#define MAX_FX_NUM            4096
+#define MAX_FX_NUM            16384
 #define DEFAULT_DEATH_ON_EXIT 1
 #define DEFAULT_TTL           4000
 
@@ -62,7 +62,7 @@ err fx_init() {
     rv = gfmGroup_setDefAnimData(fx.pGroup, pFxAnimData, fxAnimDataLen);
     ASSERT(rv == GFMRV_OK, ERR_GFMERR);
 
-    rv =  gfmGroup_setDrawOrder(fx.pGroup, gfmDrawOrder_newestFirst);
+    rv =  gfmGroup_setDrawOrder(fx.pGroup, gfmDrawOrder_linear);
     ASSERT(rv == GFMRV_OK, ERR_GFMERR);
     rv = gfmGroup_setCollisionQuality(fx.pGroup, gfmCollisionQuality_none);
     ASSERT(rv == GFMRV_OK, ERR_GFMERR);
